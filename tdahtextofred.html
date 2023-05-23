@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Exibição de Palavras</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <style>
+    html, body {
+      margin-top: 50px;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .display-word {
+      font-size: 36px;
+      font-weight: bold;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="row mt-5">
+      <div class="col-md-6 offset-md-3">
+        <h1 class="text-center">Palavras</h1>
+        <div class="form-group">
+          <label for="text-input">Texto:</label>
+          <textarea class="form-control" id="text-input" rows="5"></textarea>
+        </div>
+        <div class="form-group">
+          <label for="speed-input">Velocidade de Palavras por Minuto:</label>
+          <input type="number" class="form-control" id="speed-input">
+        </div>
+        <button class="btn btn-primary btn-block" onclick="startDisplay()">OK</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function startDisplay() {
+      var textInput = document.getElementById('text-input').value;
+      var speedInput = document.getElementById('speed-input').value;
+
+      var words = textInput.split(' ');
+      var delay = (60 / speedInput) * 1000; // Calcula o atraso em milissegundos
+
+      var index = 0;
+      var displayInterval = setInterval(function() {
+        if (index < words.length) {
+          document.body.innerHTML = '<div class="display-word">' + words[index] + '</div>';
+          index++;
+        } else {
+          clearInterval(displayInterval);
+        }
+      }, delay);
+    }
+  </script>
+</body>
+</html>
